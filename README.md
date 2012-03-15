@@ -1,4 +1,4 @@
-# ETSF01 Project - Analogy-based effort estimation for software projects
+# ETSF01 Project - Analogy-based effort estimation for software projects, Group 17
 A project in the course [ETSF01](http://cs.lth.se/english/course/etsf01/) Software Engineering Process - Economy and Quality at Lund University 2012. The goal is to 
 
 * connect theory  to  practice,
