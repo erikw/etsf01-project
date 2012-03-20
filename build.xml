@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="etsf01_project" basedir="." default="compile">
+	<description>
+		Build script for the project in the course ETSF01.
+	</description>
+
+	<!-- *** Global Variables *** -->
+	<property name="project.name" value="etsf01_project" />
+	<property name="project.group" value="17" />
+	<property name="project.authors" value="Oscar Olsson, Erik Westrup, Jonas Klauber, Simon Thörnqvist, Fredrik Petterson, Tommy Ivarsson." />
+	<property name="path.source" value="src" />
+	<property name="path.destination" value="bin" />
+	<property name="path.library" value="lib" />
+	<property name="path.documentation" value="documentation" />
+	<property name="path.release" value="release" />
+	<property name="path.test" value="test" />
+	<property name="path.mainClass" value="pack1/program" />
+
+
+	<!-- Library versions in use. Please update path externalLibs if you add/remove from here.-->
+	<property name="junit" value="junit-4.10.jar" />
+
+	<!-- *** Paths *** -->
+	<path id="externalLibs">
+		<fileset dir="${path.library}">
+			<include name="${junit}" />
+		</fileset>
+	</path>
+
+	<path id="classpath.tests">
+		<pathelement location="${path.destination}" />
+	</path>
+
+	
+	<!-- *** Targets *** -->
+	<!-- Here all targets exists. -->
+
+	<target name="compile" depends="clean" description="Compile the sources to the destination.">
+		<mkdir dir="bin" />
+		<javac destdir="${path.destination}" includeantruntime="false">
+			<src path="${path.source}" />
+			<classpath refid="externalLibs" />
+		</javac>
+	</target>
+
+	<target name="distribute" depends="compile" description="Make a releaseable JAR.">
+
+		<property name="jarName" value="${path.release}/${project.name}.jar" />
+		<delete file="${jarName}" />
+
+		<jar destfile="${jarName}" update="no" excludes=".git/**">
+			<zipgroupfileset dir="${path.library}">
+				<include name="**/*.jar" />
+			</zipgroupfileset>
+			<fileset dir="${path.documentation}" includes="**/*" />
+			<fileset dir="${path.destination}" includes="**/*.class" />
+			<manifest>
+				<attribute name="Main-class" value="${path.mainClass}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="clean" description="Delete old binaries and text files.">
+		<delete includeemptydirs="true" quiet="true"> 
+			<fileset dir="${path.destination}" includes="**/*" />
+			<fileset dir="${path.documentation}" includes="**/*" />
+		</delete>
+	</target>
+
+	<target name="test" description="Run JUnit tests and stop build if one fails.">
+		<junit printsummary="true" fork="yes" haltonfailure="true">
+			<formatter type="plain" usefile="no" />
+			<classpath refid="classpath.tests" />
+			<classpath refid="externalLibs" />
+
+			<batchtest>
+				<fileset dir="${path.destination}/" includes="${path.test}/**/**Test**.class" />
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="doc" description="Generate javadocs from sourcefiles">
+		<mkdir dir="${path.documentation}" />
+		<javadoc destdir="${path.documentation}" author="true" version="true" use="true" doctitle="${project.name} Documentation" windowtitle="${project.name} Documentation" bottom="Documentation produly presented by the authors ${project.authors}." encoding="UTF-8">
+			<fileset dir="${path.source}">
+				<include name="**/*.java" />
+				<exclude name="**/*Test*.java" />
+			</fileset>
+			<link href="http://download.oracle.com/javase/6/docs/api/" />
+			<link href="http://opencsv.sourceforge.net/api/" />
+		</javadoc>
+
+	</target>
+</project>
