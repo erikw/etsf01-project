@@ -2,12 +2,15 @@ package io;
 
 import java.util.ArrayList;
 import java.io.*;
+import model.*;
 
 public class Parser {
 
 	ArrayList<ArrayList<String>> lines;
+	ProjectDB db;
 
-	public Parser() {
+	public Parser(ProjectDB db) {
+		this.db = db;
 		lines = new ArrayList<ArrayList<String>>();
 		
 	}
@@ -44,7 +47,7 @@ public class Parser {
 					}
 					
 					lines.add(lineArray);
-
+					db.addProject(new Project(lineArray));
 				}
 			}
 		} catch(IOException ioe) {

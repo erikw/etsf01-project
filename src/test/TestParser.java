@@ -4,9 +4,21 @@ import org.junit.*;
 import java.io.*;
 import java.util.ArrayList;
 import io.Parser;
- import static org.junit.Assert.*;
+import static org.junit.Assert.*;
+import model.*;
 
 public class TestParser {
+
+	private class MockDB implements ProjectDB {
+		public void addProject(Project proj) {
+			;
+		}
+
+		public ArrayList<Project> getSimilar(Project proj) {
+			;
+		}
+		
+	}
 
 @Before
 	public void setUp() {
@@ -76,7 +88,7 @@ public class TestParser {
 		expectedEntries2.add("227");
 		expectedEntries2.add("1181");
 
-		Parser parser = new Parser();
+			Parser parser = new Parser(new MockDB());
 		parser.parse("simple_test.txt");
 
 		ArrayList<String> realEntries1 = parser.getEntries(0);	
