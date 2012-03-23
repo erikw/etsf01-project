@@ -14,7 +14,7 @@
 	<property name="path.documentation" value="documentation" />
 	<property name="path.release" value="release" />
 	<property name="path.test" value="test" />
-	<property name="path.mainClass" value="pack1/program" />
+	<property name="path.mainClass" value="ui/Estimator" />
 
 
 	<!-- Library versions in use. Please update path externalLibs if you add/remove from here.-->
@@ -43,7 +43,7 @@
 		</javac>
 	</target>
 
-	<target name="distribute" depends="compile" description="Make a releaseable JAR.">
+	<target name="distribute" depends="compile, test" description="Make a releaseable JAR.">
 
 		<property name="jarName" value="${path.release}/${project.name}.jar" />
 		<delete file="${jarName}" />
@@ -52,7 +52,7 @@
 			<zipgroupfileset dir="${path.library}">
 				<include name="**/*.jar" />
 			</zipgroupfileset>
-			<fileset dir="${path.documentation}" includes="**/*" />
+			<!--<fileset dir="${path.documentation}" includes="**/*" />-->
 			<fileset dir="${path.destination}" includes="**/*.class" />
 			<manifest>
 				<attribute name="Main-class" value="${path.mainClass}" />

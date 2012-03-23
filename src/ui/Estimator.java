@@ -55,6 +55,7 @@ public class Estimator {
 			boolean correct = false;
 			int number = 0;
 			while (!correct) {
+				System.out.print("> ");
 				if (sc.hasNextInt()) {
 					number = sc.nextInt();
 					if (number >= 0 && number < values.length) {
@@ -71,6 +72,7 @@ public class Estimator {
 		System.out.println("LOC, enter number:");
 		boolean correct = false;
 		while (!correct) {
+			System.out.print("> ");
 			if (sc.hasNextInt()) {
 				correct = true;
 				int number = sc.nextInt();
@@ -80,9 +82,10 @@ public class Estimator {
 			}
 		}
 
+		System.out.println("ACT_EFFORT, enter number:");
 		correct = false;
 		while (!correct) {
-			System.out.println("ACT_EFFORT, enter number:");
+			System.out.print("> ");
 			if (sc.hasNextInt()) {
 				correct = true;
 				int number = sc.nextInt(); // TODO is a double?
