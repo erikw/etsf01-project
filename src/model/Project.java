@@ -17,4 +17,9 @@ public class Project {
 	public double calculateSimilarity(Project rhs){
 		return 0.0;
 	}
+
+	/* see lecture 1 page 9. */
+	public double calculateEffort(List<Project> similarProjects){
+		return 0.0;
+	}
 }
