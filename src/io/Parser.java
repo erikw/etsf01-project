@@ -18,12 +18,9 @@ public class Parser {
 	public void parse(String fileName){
 		try {
 			BufferedReader in  = new BufferedReader(new FileReader(fileName));
-			System.out.println("correct file");
 			String line;
 			while((line = in.readLine()) != null) {
-				System.out.println("line read");
 				if(!line.matches("^\\s*(%.*$|@.*$|$)")) {
-					System.out.println("if entered");
 					ArrayList<String> lineArray = new ArrayList<String>();
 					String[] parts = line.split(",");
 					boolean commentFound = false;

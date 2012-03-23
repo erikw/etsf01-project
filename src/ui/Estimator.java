@@ -1,3 +1,5 @@
+package ui;
+
 import model.*;
 import io.*;
 import java.util.*;
@@ -22,7 +24,8 @@ public class Estimator {
 			db = new CocoMoDB();
 			Parser parser = new Parser(db);
 			parser.parse(fileName);
-			attribs = new HashMap<String, String[]>();
+			//attribs = new HashMap<String, String[]>();
+			attribs = new LinkedHashMap<String, String[]>();
 			attribs.put("RELY", new String[] {"Nominal","Very_High","High","Low"});
 			attribs.put("DATA", new String[] {"High","Low","Nominal","Very_High"});
 			attribs.put("CPLX", new String[] {"Very_High","High","Nominal","Extra_High","Low"});
@@ -37,31 +40,74 @@ public class Estimator {
 			attribs.put("MODP", new String[] {"High","Nominal","Very_High","Low"});
 			attribs.put("TOOL", new String[] {"Nominal","High","Very_High","Very_Low","Low"});
 			attribs.put("SCED", new String[] {"Low","Nominal","High"});
-			attribs.put("LOC",  new String[] {"numeric"});
-			attribs.put("ACT_EFFORT", new String[] {"numeric"});
+			//attribs.put("LOC",  new String[] {"numeric"});
+			//attribs.put("ACT_EFFORT", new String[] {"numeric"});
 
 	}
 
 	public void getParams() {
 		Scanner sc = new Scanner(System.in);
-		System.out.println("RELY {Nominal,Very_High,High,Low}");
-		
-		System.out.println("DATA {High,Low,Nominal,Very_High}");
-		System.out.println("CPLX {Very_High,High,Nominal,Extra_High,Low");
-		System.out.println("TIME {Nominal,Very_High,High,Extra_High}");
-		System.out.println("STOR {Nominal,Very_High,High,Extra_High}");
-		System.out.println("TURN {Nominal,High,Low}");
-		System.out.println("ACAP {High,Very_High,Nominal}");
-		System.out.println("AEXP {Nominal,Very_High,High}");
-		System.out.println("PCAP {Very_High,High,Nominal}");
-		System.out.println("VEXP {Low,Nominal,High}");
-		System.out.println("LEXP {Nominal,High,Very_Low,Low}");
-		System.out.println("MODP {High,Nominal,Very_High,Low}");
-		System.out.println("TOOL {Nominal,High,Very_High,Very_Low,Low}");
-		System.out.println("SCED {Low,Nominal,High}");
-		System.out.println("LOC {numeric}");
-		System.out.println("ACT_EFFORT {numeric}");
-		//Project inputProject = new Project();
+		ArrayList<String> userAttribs = new ArrayList<String>();
+		for (String key : attribs.keySet()) {
+			System.out.println(key + ", choose number:");
+			String[] values = attribs.get(key);
+			printVal(values);
+			boolean correct = false;
+			int number = 0;
+			while (!correct) {
+				if (sc.hasNextInt()) {
+					number = sc.nextInt();
+					if (number >= 0 && number < values.length) {
+						correct = true;
+					} else {
+						System.err.println("Bad number, try again.");
+					}
+				} else {
+					System.err.println("Type number.");
+				}
+			}
+			userAttribs.add(values[number]);
+		}
+		System.out.println("LOC, enter number:");
+		boolean correct = false;
+		while (!correct) {
+			if (sc.hasNextInt()) {
+				correct = true;
+				int number = sc.nextInt();
+				userAttribs.add(String.valueOf(number));
+			} else {
+				System.err.println("Bad number, try again.");
+			}
+		}
+
+		correct = false;
+		while (!correct) {
+			System.out.println("ACT_EFFORT, enter number:");
+			if (sc.hasNextInt()) {
+				correct = true;
+				int number = sc.nextInt(); // TODO is a double?
+				userAttribs.add(String.valueOf(number));
+			} else {
+				System.err.println("Bad number, try again.");
+			}
+		}
+
+
+
+		for (String str : userAttribs) {
+			System.out.println("user attrib is: " + str);
+		}
+		Project inputProject = new Project(userAttribs);
+
+
+		// TODO user inputProject in  algorithm.
+		System.out.println("Time estimation is:....");
+	}
+
+	private void printVal(String[] values) {
+		for (int i = 0; i < values.length; ++i) {
+			System.out.println(i  + ". " + values[i]);
+		}
 	}
 	
 
