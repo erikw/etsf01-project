@@ -14,12 +14,13 @@ Compile and run by typing the following commands:
 	$ant distribute
 	$java -jar release/etsf01_project.jar testdata/ETSF01-Data-Text.txt
 or
+
 	$cd etsf01_project/
 	$ant 
-	$java -cp bin ui.Estimator testdata/ETSF01-Data-Text.txt
+	$./run.sh
 	
 
-	Answer the questions about you project, enter threshold and you will get estimates for your project.
+Answer the questions about you project, enter threshold and you will get estimates for your project.
 
 ##Contributors
 
