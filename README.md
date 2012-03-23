@@ -7,6 +7,20 @@ A project in the course [ETSF01](http://cs.lth.se/english/course/etsf01/) Softwa
 
 For further documentation; visit [doc/](https://github.com/erikw/etsf01_project/tree/master/doc).
 
+## How to build and run
+Compile and run by typing the following commands:
+
+	$cd etsf01_project/
+	$ant distribute
+	$java -jar release/etsf01_project.jar testdata/ETSF01-Data-Text.txt
+or
+	$cd etsf01_project/
+	$ant 
+	$java -cp bin ui.Estimator testdata/ETSF01-Data-Text.txt
+	
+
+	Answer the questions about you project, enter threshold and you will get estimates for your project.
+
 ##Contributors
 
 [Oscar Olsson](https://github.com/DrunkenInfant)
