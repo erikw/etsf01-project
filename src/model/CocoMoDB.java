@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CocoMoDB implements ProjectDB  {
 	private ArrayList<Project> refProjects;
@@ -32,6 +33,7 @@ public class CocoMoDB implements ProjectDB  {
 		threshold = newThreshold;
 	}
 	private double eucLength(Project source){
+		return 0.0;
 	}
 
 }
