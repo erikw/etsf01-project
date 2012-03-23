@@ -1,0 +1,16 @@
+attribs.put("RELY", new String[] {"Nominal","Very_High","High","Low"});
+attribs.put("DATA", new String[] {"High","Low","Nominal","Very_High"});
+attribs.put("CPLX", new String[] {"Very_High","High","Nominal","Extra_High","Low"});
+attribs.put("TIME", new String[] {"Nominal","Very_High","High","Extra_High"});
+attribs.put("STOR", new String[] {"Nominal","Very_High","High","Extra_High"});
+attribs.put("TURN", new String[] {"Nominal","High","Low"});
+attribs.put("ACAP", new String[] {"High","Very_High","Nominal"});
+attribs.put("AEXP", new String[] {"Nominal","Very_High","High"});
+attribs.put("PCAP", new String[] {"Very_High","High","Nominal"});
+attribs.put("VEXP", new String[] {"Low","Nominal","High"});
+attribs.put("LEXP", new String[] {"Nominal","High","Very_Low","Low"});
+attribs.put("MODP", new String[] {"High","Nominal","Very_High","Low"});
+attribs.put("TOOL", new String[] {"Nominal","High","Very_High","Very_Low","Low"});
+attribs.put("SCED", new String[] {"Low","Nominal","High"});
+attribs.put("LOC",  new String[] {"numeric"});
+attribs.put("ACT_EFFORT", {"numeric"});

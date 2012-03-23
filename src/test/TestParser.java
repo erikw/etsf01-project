@@ -15,7 +15,7 @@ public class TestParser {
 		}
 
 		public ArrayList<Project> getSimilar(Project proj) {
-			;
+			return null;
 		}
 		
 	}
