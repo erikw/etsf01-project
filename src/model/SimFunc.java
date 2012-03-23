@@ -11,11 +11,12 @@ public SimFunc(ProjectDB db){
 	pred = 0;
 }
 
-public List<Project> simularProj(Project proj);
+
+public abstract List<Project> simularProj(Project proj);
 public double predProj(){
 	return pred;
 }
-private double compare(Project proj);
+private abstract double compare(Project proj);
 public void setThreshold(double newThreshold){
 	threshold = newThreshold;
 }
