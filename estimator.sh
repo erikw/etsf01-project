@@ -1,5 +1,5 @@
 #!/bin/sh
-# Start the main program.
+# Start the main program with parameter.
 
 if [ -n "$1" ]; then
 	data_file=$1
