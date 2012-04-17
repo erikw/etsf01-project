@@ -12,15 +12,11 @@ Compile and run by typing the following commands:
 
 	$cd etsf01_project/
 	$ant distribute
-	$java -jar release/etsf01_project.jar testdata/ETSF01-Data-Text.txt
-or
+	$./run.sh [<data filename>]
+	$./config.sh | ./run.sh [<data filename>]
 
-	$cd etsf01_project/
-	$ant 
-	$./run.sh
-	
+The first `run.sh` command will present an interactive interface where you will answer the questions about you project, enter threshold and you will get estimates for your project. In the seconds form a static configuration from the script `config.sh` will be fed to the program. You can edit the values in that script your self.
 
-Answer the questions about you project, enter threshold and you will get estimates for your project.
 
 ##Contributors
 
