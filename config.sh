@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # A static configuration for project paramters. Edit the assignments below. The integer corresponds to the position in the sets in the comments. The first element in the set has index 1.
 declare -A parameters
 
