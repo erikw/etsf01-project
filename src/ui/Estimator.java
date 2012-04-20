@@ -70,6 +70,7 @@ public class Estimator {
 					}
 				} else {
 					System.err.println("Type number.");
+					sc = new Scanner(System.in);
 				}
 			}
 			userAttribs.add(values[number]);
