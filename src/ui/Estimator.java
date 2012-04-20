@@ -20,6 +20,8 @@ public class Estimator {
 		}
 	}
 
+	public enum Attribute { RELY, DATA, CPLX, TIME, STOR, VIRT, TURN, ACAP, AEXP, PCAP,
+					VEXP, LEXP, MODP, TOOL, SCED, LOC, ACT_EFFORT}
 	public Estimator(String fileName) {
 		try {
 			db = new CocoMoDB();
@@ -32,6 +34,7 @@ public class Estimator {
 			attribs.put("CPLX", new String[] {"Very_High","High","Nominal","Extra_High","Low"});
 			attribs.put("TIME", new String[] {"Nominal","Very_High","High","Extra_High"});
 			attribs.put("STOR", new String[] {"Nominal","Very_High","High","Extra_High"});
+			attribs.put("VIRT", new String[] {"Low","Nominal","High","Very_High"});
 			attribs.put("TURN", new String[] {"Nominal","High","Low"});
 			attribs.put("ACAP", new String[] {"High","Very_High","Nominal"});
 			attribs.put("AEXP", new String[] {"Nominal","Very_High","High"});

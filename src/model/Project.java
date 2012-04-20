@@ -6,11 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
 import java.util.EnumSet;
+import java.lang.IllegalArgumentException;
 
 public class Project {
 	private Map<Attribute, Double> attributes;
 	private Map<Attribute, Double> attribCategorial;
-	private Map<Attribute, Double> attribNummerical;
+	private Map<Attribute, Double> attribNumerical;
 
 	public enum Attribute { RELY, DATA, CPLX, TIME, STOR, VIRT, TURN, ACAP, AEXP, PCAP,
 					VEXP, LEXP, MODP, TOOL, SCED, LOC, ACT_EFFORT}
@@ -133,19 +134,20 @@ public class Project {
 
 	public Project(List<String> attributes){
 		attribCategorial = new HashMap<Attribute, Double>();
-		attribNummerical = new HashMap<Attribute, Double>();
+		attribNumerical = new HashMap<Attribute, Double>();
 		Iterator<String> iter = attributes.iterator();
 		for (Attribute att : EnumSet.range(Attribute.RELY, Attribute.SCED)) {
 			try {
-				attribCategorial.put(att, Double.parseDouble(iter.next()));
-			} catch (NumberFormatException nfe) {
+				attribCategorial.put(att, attributeMap.get(att).
+					get(stringToAttributeValue(iter.next())));
+			} catch (IllegalArgumentException nfe) {
 				nfe.printStackTrace();
 			}
 		}
 
 		for (Attribute att : EnumSet.range(Attribute.LOC, Attribute.ACT_EFFORT)) {
 			try {
-				attribNummerical.put(att, Double.parseDouble(iter.next()));
+				attribNumerical.put(att, Double.parseDouble(iter.next()));
 			} catch (NumberFormatException nfe) {
 				nfe.printStackTrace();
 			}
@@ -153,15 +155,19 @@ public class Project {
 	}
 		
 	private void setAttribute(Attribute attr, AttributeValue value){
-		this.attributes.put(attr, attributeMap.get(attr).get(value));	
+		this.attribCategorial.put(attr, attributeMap.get(attr).get(value));	
 	}
 
 	private void setAttribute(Attribute attr, double value){
-		this.attributes.put(attr, value);
+		this.attribNumerical.put(attr, value);	
 	}
 
 	public double getAttribute(Attribute attr){
-		return this.attributes.get(attr);
+		if(attribCategorial.containsKey(attr)){
+			return this.attribCategorial.get(attr);
+		} else {
+			return this.attribNumerical.get(attr);
+		}
 	}
 
 	public double calculateSimilarity(Project rhs, ProjectDB db) {
@@ -172,16 +178,34 @@ public class Project {
 			}
 		}
 
-		for (Attribute a : attribNummerical.keySet()) {
-			distance += Math.pow((attribNummerical.get(a) - rhs.getAttribute(a)) / (db.getMaxAttrib(a) - db.getMinAttrib(a)) , 2);
+		for (Attribute a : attribNumerical.keySet()) {
+			distance += Math.pow((attribNumerical.get(a) - rhs.getAttribute(a)) / (db.getMaxAttrib(a) - db.getMinAttrib(a)) , 2);
 		}
 
-		double similarity = 1 - Math.sqrt(distance/(attribCategorial.size() + attribNummerical.size()));
+		double similarity = 1 - Math.sqrt(distance/(attribCategorial.size() + attribNumerical.size()));
 		return similarity;
 	}
 	
 	/* see lecture 1 page 9. */
 	public double calculateEffort(List<Project> similarProjects){
 		return 0.0;
+	}
+
+	private AttributeValue stringToAttributeValue(String str) throws IllegalArgumentException{
+		if(str.equalsIgnoreCase("VERY_LOW")){
+			return AttributeValue.VERY_LOW;
+		} else if(str.equalsIgnoreCase("LOW")){
+			return AttributeValue.LOW;
+		} else if(str.equalsIgnoreCase("NOMINAL")){
+			return AttributeValue.NOMINAL;
+		} else if(str.equalsIgnoreCase("HIGH")){
+			return AttributeValue.HIGH;
+		} else if(str.equalsIgnoreCase("VERY_HIGH")){
+			return AttributeValue.VERY_HIGH;
+		} else if(str.equalsIgnoreCase("EXTRA_HIGH")){
+			return AttributeValue.EXTRA_HIGH;
+		} else {
+			throw new IllegalArgumentException("Unsupported attibute value: " + str);
+		}
 	}
 }
