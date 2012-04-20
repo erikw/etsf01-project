@@ -84,8 +84,11 @@ public class TestParser {
 		expectedEntries2.add("1181");
 
 		Parser parser = new Parser(new MockDB());
+		try{
 		parser.parse("simple_test.txt");
-
+		} catch(IOException e){
+			fail("Caught IOException");
+		}
 		ArrayList<String> realEntries1 = parser.getEntries(0);	
 		ArrayList<String> realEntries2 = parser.getEntries(1);
 		assertEquals(expectedEntries1.size(), realEntries1.size());	

@@ -21,6 +21,7 @@ public class Estimator {
 	}
 
 	public Estimator(String fileName) {
+		try {
 			db = new CocoMoDB();
 			Parser parser = new Parser(db);
 			parser.parse(fileName);
@@ -42,7 +43,11 @@ public class Estimator {
 			attribs.put("SCED", new String[] {"Low","Nominal","High"});
 			//attribs.put("LOC",  new String[] {"numeric"});
 			//attribs.put("ACT_EFFORT", new String[] {"numeric"});
-
+		} catch(IOException e){
+			e.printStackTrace();
+			//System.err.println("File not found.");
+			System.exit(1);
+		}
 	}
 
 	public void getParams() {
