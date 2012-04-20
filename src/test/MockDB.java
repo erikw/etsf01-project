@@ -12,5 +12,8 @@ public class MockDB implements ProjectDB {
 	public ArrayList<Project> getSimilar(Project proj) {
 		return null;
 	}
+
+	public void setThreshold(double newThreshold) {
+	}
 	
 }

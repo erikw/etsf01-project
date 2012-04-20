@@ -76,32 +76,11 @@ public class Estimator {
 			userAttribs.add(values[number]);
 		}
 		System.out.println("LOC, enter number:");
-		boolean correct = false;
-		while (!correct) {
-			System.out.print("> ");
-			if (sc.hasNextInt()) {
-				correct = true;
-				int number = sc.nextInt();
-				userAttribs.add(String.valueOf(number));
-			} else {
-				System.err.println("Bad number, try again.");
-			}
-		}
-
+		getDoubleInput(sc, userAttribs);
 		System.out.println("ACT_EFFORT, enter number:");
-		correct = false;
-		while (!correct) {
-			System.out.print("> ");
-			if (sc.hasNextInt()) {
-				correct = true;
-				int number = sc.nextInt(); // TODO is a double?
-				userAttribs.add(String.valueOf(number));
-			} else {
-				System.err.println("Bad number, try again.");
-			}
-		}
-
-
+		getDoubleInput(sc, userAttribs);
+		System.out.println("Threshold, enter number(0-100):");
+		db.setThreshold(getDoubleInput(sc,new ArrayList<String>())/100.0); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
 
 		for (String str : userAttribs) {
 			System.out.println("user attrib is: " + str);
@@ -118,8 +97,24 @@ public class Estimator {
 			System.out.println(i  + ". " + values[i]);
 		}
 	}
-	
 
+
+	
+	private double getDoubleInput(Scanner sc, ArrayList<String> userAttribs){
+	boolean correct = false;
+	double number = 0.0;
+	while (!correct) {
+		System.out.print("> ");
+		if (sc.hasNextDouble()) {
+			correct = true;
+			number = sc.nextDouble();
+			userAttribs.add(String.valueOf(number));
+		} else {
+			System.err.println("Bad number, try again.");
+		}
+	}
+	return number;
+	}
 
 	//program loaded
 	//enter Att c [high, medium, low] :
