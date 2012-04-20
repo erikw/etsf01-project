@@ -80,8 +80,9 @@ public class Estimator {
 		System.out.println("ACT_EFFORT, enter number:");
 		getDoubleInput(sc, userAttribs);
 		System.out.println("Threshold, enter number(0-100):");
+		//TODO Styra att man inte kan skicka in tal över 100.
 		db.setThreshold(getDoubleInput(sc,new ArrayList<String>())/100.0); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
-
+         
 		for (String str : userAttribs) {
 			System.out.println("user attrib is: " + str);
 		}
@@ -89,6 +90,7 @@ public class Estimator {
 
 
 		// TODO user inputProject in  algorithm.
+		// TODO Informera användaren om  det riktiga värdet är lägre än threshold
 		System.out.println("Time estimation is:....");
 	}
 
