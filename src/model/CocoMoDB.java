@@ -48,14 +48,18 @@ public class CocoMoDB implements ProjectDB  {
 		return refProjects;
 	}
 
-	public void setThreshold(double newThreshold){
+	public void setThreshold(double newThreshold) {
 		threshold = newThreshold;
 	}
 
+	public double getThreshold() {
+		return threshold;
+	}
+
 	private double eucLength(Project source){
-		for(Double d : atrToValue(source.getList())){
-			// do calc lolz
-		}
+		//for(Double d : atrToValue(source.getList())){
+			//// do calc lolz
+		//}
 		return 0.0;
 	}
 
@@ -65,6 +69,31 @@ public class CocoMoDB implements ProjectDB  {
 			atr.add(values[i][attributes.get(toBeMapped.get(i))]);
 		}
 		return atr;
+	}
+
+
+	public double getMaxAttrib(Project.Attribute attr) {
+		double max = 0;
+		double value;
+		for (Project p : refProjects) {
+			value = p.getAttribute(attr);
+			if (value > max) {
+				max = value;
+			}
+		}
+		return max;
+	}
+
+	public double getMinAttrib(Project.Attribute attr) {
+		double min = Double.MAX_VALUE;
+		double value;
+		for (Project p : refProjects) {
+			value = p.getAttribute(attr);
+			if (value < min) {
+				min = value;
+			}
+		}
+		return min;
 	}
 
 }

@@ -15,5 +15,8 @@ public class MockDB implements ProjectDB {
 
 	public void setThreshold(double newThreshold) {
 	}
+
+	public double getMaxAttrib(Project.Attribute attr) {return 0;}
+	public double getMinAttrib(Project.Attribute attr) {return 0;}
 	
 }

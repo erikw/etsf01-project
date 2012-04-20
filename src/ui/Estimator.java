@@ -79,10 +79,13 @@ public class Estimator {
 		getDoubleInput(sc, userAttribs);
 		System.out.println("ACT_EFFORT, enter number:");
 		getDoubleInput(sc, userAttribs);
-		System.out.println("Threshold, enter number(0-100):");
-		//TODO Styra att man inte kan skicka in tal över 100.
-		db.setThreshold(getDoubleInput(sc,new ArrayList<String>())/100.0); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
-         
+		double threshold;
+		do {
+			System.out.println("Threshold, enter number(0-100):");
+			threshold = getDoubleInput(sc, new ArrayList<String>());	
+		} while (threshold < 0 || threshold > 100);
+		db.setThreshold(threshold/100.0); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
+
 		for (String str : userAttribs) {
 			System.out.println("user attrib is: " + str);
 		}
@@ -103,31 +106,21 @@ public class Estimator {
 
 	
 	private double getDoubleInput(Scanner sc, ArrayList<String> userAttribs){
-	boolean correct = false;
-	double number = 0.0;
-	while (!correct) {
-		System.out.print("> ");
-		if (sc.hasNextDouble()) {
-			correct = true;
-			number = sc.nextDouble();
-			userAttribs.add(String.valueOf(number));
-		} else {
-			System.err.println("Bad number, try again.");
+		boolean correct = false;
+		double number = 0.0;
+		while (!correct) {
+			System.out.print("> ");
+			if (sc.hasNextDouble()) {
+				correct = true;
+				number = sc.nextDouble();
+				userAttribs.add(String.valueOf(number));
+			} else {
+				System.err.println("Bad number, try again.");
+				sc = new Scanner(System.in);
+			}
 		}
+		return number;
 	}
-	return number;
-	}
-
-	//program loaded
-	//enter Att c [high, medium, low] :
-	//> tal
-	//enter Att b:
-	//> tal
-	//enter Att b:
-	//> tal
-	//enter Att b:
-	//Estimate is: 3454
-	//> 
 
 	public int getEstimate(String[] params) {
 		return 0;
