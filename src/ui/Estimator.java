@@ -20,14 +20,11 @@ public class Estimator {
 		}
 	}
 
-	public enum Attribute { RELY, DATA, CPLX, TIME, STOR, VIRT, TURN, ACAP, AEXP, PCAP,
-					VEXP, LEXP, MODP, TOOL, SCED, LOC, ACT_EFFORT}
 	public Estimator(String fileName) {
 		try {
 			db = new CocoMoDB();
 			Parser parser = new Parser(db);
 			parser.parse(fileName);
-			//attribs = new HashMap<String, String[]>();
 			attribs = new LinkedHashMap<String, String[]>();
 			attribs.put("RELY", new String[] {"Nominal","Very_High","High","Low"});
 			attribs.put("DATA", new String[] {"High","Low","Nominal","Very_High"});
@@ -57,7 +54,7 @@ public class Estimator {
 		Scanner sc = new Scanner(System.in);
 		ArrayList<String> userAttribs = new ArrayList<String>();
 		for (String key : attribs.keySet()) {
-			System.out.println(key + ", choose number:");
+			System.out.println(key + ", choose a number:");
 			String[] values = attribs.get(key);
 			printVal(values);
 			boolean correct = false;
