@@ -9,6 +9,122 @@ public class Project {
 	public enum Attribute { RELY, DATA, CPLX, TIME, STOR, VIRT, TURN, ACAP, AEXP, PCAP,
 					VEXP, LEXP, MODP, TOOL, SCED, LOC, ACT_EFFORT}
 
+	public enum AttributeValue { VERY_LOW, LOW, NOMINAL, HIGH, VERY_HIGH, EXTRA_HIGH }
+
+	private static Map<Attribute, Map<AttributeValue, Double>> attributeMap = new HashMap<Attribute, HashMap<AttributeValue, Double>>(); 
+	
+	static {
+		for (Attribute attribute : Attribute.values()){
+			attribute.put(attribute, new HashMap<AttributeValue, Double>());
+		}
+
+		attributeMap.get(Attribute.RELY).put(AttributeValue.VERY_LOW, 0.75);
+		attributeMap.get(Attribute.RELY).put(AttributeValue.LOW, 0.88);
+		attributeMap.get(Attribute.RELY).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.RELY).put(AttributeValue.HIGH, 1.15);
+		attributeMap.get(Attribute.RELY).put(AttributeValue.VERY_HIGH, 1.40);
+		attributeMap.get(Attribute.RELY).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.DATA).put(AttributeValue.VERY_LOW, 0);
+		attributeMap.get(Attribute.DATA).put(AttributeValue.LOW, 0.94);
+		attributeMap.get(Attribute.DATA).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.DATA).put(AttributeValue.HIGH, 1.08);
+		attributeMap.get(Attribute.DATA).put(AttributeValue.VERY_HIGH, 1.16);
+		attributeMap.get(Attribute.DATA).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.CPLX).put(AttributeValue.VERY_LOW, 0.70);
+		attributeMap.get(Attribute.CPLX).put(AttributeValue.LOW, 0.85);
+		attributeMap.get(Attribute.CPLX).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.CPLX).put(AttributeValue.HIGH, 1.15);
+		attributeMap.get(Attribute.CPLX).put(AttributeValue.VERY_HIGH, 1.30);
+		attributeMap.get(Attribute.CPLX).put(AttributeValue.EXTRA_HIGH, 1.65);
+
+		attributeMap.get(Attribute.TIME).put(AttributeValue.VERY_LOW, 0);
+		attributeMap.get(Attribute.TIME).put(AttributeValue.LOW, 0);
+		attributeMap.get(Attribute.TIME).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.TIME).put(AttributeValue.HIGH, 1.11);
+		attributeMap.get(Attribute.TIME).put(AttributeValue.VERY_HIGH, 1.30);
+		attributeMap.get(Attribute.TIME).put(AttributeValue.EXTRA_HIGH, 1.66);
+
+		attributeMap.get(Attribute.STOR).put(AttributeValue.VERY_LOW, 0);
+		attributeMap.get(Attribute.STOR).put(AttributeValue.LOW, 0);
+		attributeMap.get(Attribute.STOR).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.STOR).put(AttributeValue.HIGH, 1.06);
+		attributeMap.get(Attribute.STOR).put(AttributeValue.VERY_HIGH, 1.21);
+		attributeMap.get(Attribute.STOR).put(AttributeValue.EXTRA_HIGH, 1.56);
+
+		attributeMap.get(Attribute.VIRT).put(AttributeValue.VERY_LOW, 0);
+		attributeMap.get(Attribute.VIRT).put(AttributeValue.LOW, 0.87);
+		attributeMap.get(Attribute.VIRT).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.VIRT).put(AttributeValue.HIGH, 1.15);
+		attributeMap.get(Attribute.VIRT).put(AttributeValue.VERY_HIGH, 1.30);
+		attributeMap.get(Attribute.VIRT).put(AttributeValue.EXTRA_HIGH, 1.0);
+
+		attributeMap.get(Attribute.TURN).put(AttributeValue.VERY_LOW, 0);
+		attributeMap.get(Attribute.TURN).put(AttributeValue.LOW, 0.87);
+		attributeMap.get(Attribute.TURN).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.TURN).put(AttributeValue.HIGH, 1.07);
+		attributeMap.get(Attribute.TURN).put(AttributeValue.VERY_HIGH, 1.15);
+		attributeMap.get(Attribute.TURN).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.ACAP).put(AttributeValue.VERY_LOW, 1.46);
+		attributeMap.get(Attribute.ACAP).put(AttributeValue.LOW, 1.19);
+		attributeMap.get(Attribute.ACAP).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.ACAP).put(AttributeValue.HIGH, 0.86);
+		attributeMap.get(Attribute.ACAP).put(AttributeValue.VERY_HIGH, 0.71);
+		attributeMap.get(Attribute.ACAP).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.AEXP).put(AttributeValue.VERY_LOW, 1.29);
+		attributeMap.get(Attribute.AEXP).put(AttributeValue.LOW, 1.13);
+		attributeMap.get(Attribute.AEXP).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.AEXP).put(AttributeValue.HIGH, 0.91);
+		attributeMap.get(Attribute.AEXP).put(AttributeValue.VERY_HIGH, 0.82);
+		attributeMap.get(Attribute.AEXP).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.VCAP).put(AttributeValue.VERY_LOW, 1.42);
+		attributeMap.get(Attribute.VCAP).put(AttributeValue.LOW, 1.17);
+		attributeMap.get(Attribute.VCAP).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.VCAP).put(AttributeValue.HIGH, 0.86);
+		attributeMap.get(Attribute.VCAP).put(AttributeValue.VERY_HIGH, 0.70);
+		attributeMap.get(Attribute.VCAP).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.VEXP).put(AttributeValue.VERY_LOW, 1.21);
+		attributeMap.get(Attribute.VEXP).put(AttributeValue.LOW, 1.10);
+		attributeMap.get(Attribute.VEXP).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.VEXP).put(AttributeValue.HIGH, 0.90);
+		attributeMap.get(Attribute.VEXP).put(AttributeValue.VERY_HIGH, 0);
+		attributeMap.get(Attribute.VEXP).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.LEXP).put(AttributeValue.VERY_LOW, 1.14);
+		attributeMap.get(Attribute.LEXP).put(AttributeValue.LOW, 1.07);
+		attributeMap.get(Attribute.LEXP).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.LEXP).put(AttributeValue.HIGH, 0.95);
+		attributeMap.get(Attribute.LEXP).put(AttributeValue.VERY_HIGH, 0);
+		attributeMap.get(Attribute.LEXP).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.MODP).put(AttributeValue.VERY_LOW, 1.24);
+		attributeMap.get(Attribute.MODP).put(AttributeValue.LOW, 1.10);
+		attributeMap.get(Attribute.MODP).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.MODP).put(AttributeValue.HIGH, 0.91);
+		attributeMap.get(Attribute.MODP).put(AttributeValue.VERY_HIGH, 0.82);
+		attributeMap.get(Attribute.MODP).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.TOOL).put(AttributeValue.VERY_LOW, 1.24);
+		attributeMap.get(Attribute.TOOL).put(AttributeValue.LOW, 1.10);
+		attributeMap.get(Attribute.TOOL).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.TOOL).put(AttributeValue.HIGH, 0.91);
+		attributeMap.get(Attribute.TOOL).put(AttributeValue.VERY_HIGH, 0.83);
+		attributeMap.get(Attribute.TOOL).put(AttributeValue.EXTRA_HIGH, 0);
+
+		attributeMap.get(Attribute.SCED).put(AttributeValue.VERY_LOW, 1.23);
+		attributeMap.get(Attribute.SCED).put(AttributeValue.LOW, 1.08);
+		attributeMap.get(Attribute.SCED).put(AttributeValue.NOMINAL, 1);
+		attributeMap.get(Attribute.SCED).put(AttributeValue.HIGH, 1.04);
+		attributeMap.get(Attribute.SCED).put(AttributeValue.VERY_HIGH, 1.10);
+		attributeMap.get(Attribute.SCED).put(AttributeValue.EXTRA_HIGH, 0);
+
+	}	
+
 	public Project(List<String> attributes){
 		attribCategorial = new HashMap<Attribute, Double>();
 		attribNummerical = new HashMap<Attribute, Double>();

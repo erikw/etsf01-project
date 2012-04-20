@@ -11,7 +11,9 @@ public class CocoMoDB implements ProjectDB  {
 
 	private HashMap<String,Integer> attributes = new HashMap<String, Integer>(); 
 
-	private double[][] values = {
+	private Map<Map>
+
+	/*private double[][] values = {
 		{ 0.75, 0.88, 1.00, 1.15, 1.40, 0   },
 		{ 0,    0.94, 1.00, 1.08, 1.16, 0   },
 		{ 0.70, 0.85, 1.00, 1.15, 1.30, 1.65}, 
@@ -27,7 +29,7 @@ public class CocoMoDB implements ProjectDB  {
 		{ 1.24, 1.10, 1.00, 0.91, 0.82, 0   },
 		{ 1.24, 1.10, 1.00, 0.91, 0.83, 0   },
 		{ 1.23, 1.08, 1.00, 1.04, 1.10, 0   } }; 
-
+*/
 	
 	public CocoMoDB(){
 		refProjects = new ArrayList<Project>();
