@@ -1,5 +1,5 @@
 # ETSF01 Project - Analogy-based effort estimation for software projects
-A project in the course [ETSF01](http://cs.lth.se/english/course/etsf01/) Software Engineering Process - Economy and Quality at Lund University 2012 by group 17. The goal is to 
+A project in the course [ETSF01](http://cs.lth.se/english/course/etsf01/) Software Engineering Process - Economy and Quality at Lund University 2012 by group 17. The goal is to
 
 * connect theory  to  practice,
 * give a concrete experience of developing and using a tool for software cost estimation,
@@ -11,7 +11,7 @@ For further documentation; visit [doc/](https://github.com/erikw/etsf01_project/
 Compile and run by typing the following commands:
 
 	$cd etsf01_project/
-	$ant distribute
+	$ant
 	$./estimator.sh [<data filename>]
 	$./config.sh | ./estimator.sh [<data filename>]
 
