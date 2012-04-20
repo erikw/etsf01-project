@@ -14,14 +14,14 @@ public class Project {
 	private Map<Attribute, Double> attribNumerical;
 
 	public enum Attribute { RELY, DATA, CPLX, TIME, STOR, VIRT, TURN, ACAP, AEXP, PCAP,
-					VEXP, LEXP, MODP, TOOL, SCED, LOC, ACT_EFFORT}
+		VEXP, LEXP, MODP, TOOL, SCED, LOC, ACT_EFFORT}
 
 	public enum AttributeValue { VERY_LOW, LOW, NOMINAL, HIGH, VERY_HIGH, EXTRA_HIGH }
 
-	private static HashMap<Attribute, HashMap<AttributeValue, Double>> attributeMap = new HashMap<Attribute, HashMap<AttributeValue, Double>>(); 
-	
+	private static HashMap<Attribute, HashMap<AttributeValue, Double>> attributeMap = new HashMap<Attribute, HashMap<AttributeValue, Double>>();
+
 	static {
-		for (Attribute attribute : Attribute.values()){
+		for (Attribute attribute : Attribute.values()) {
 			attributeMap.put(attribute, new HashMap<AttributeValue, Double>());
 		}
 
@@ -130,16 +130,16 @@ public class Project {
 		attributeMap.get(Attribute.SCED).put(AttributeValue.VERY_HIGH, 1.10);
 		attributeMap.get(Attribute.SCED).put(AttributeValue.EXTRA_HIGH, 0.0);
 
-	}	
+	}
 
-	public Project(List<String> attributes){
+	public Project(List<String> attributes) {
 		attribCategorial = new HashMap<Attribute, Double>();
 		attribNumerical = new HashMap<Attribute, Double>();
 		Iterator<String> iter = attributes.iterator();
 		for (Attribute att : EnumSet.range(Attribute.RELY, Attribute.SCED)) {
 			try {
 				attribCategorial.put(att, attributeMap.get(att).
-					get(stringToAttributeValue(iter.next())));
+						get(stringToAttributeValue(iter.next())));
 			} catch (IllegalArgumentException nfe) {
 				nfe.printStackTrace();
 			}
@@ -153,17 +153,17 @@ public class Project {
 			}
 		}
 	}
-		
-	private void setAttribute(Attribute attr, AttributeValue value){
-		this.attribCategorial.put(attr, attributeMap.get(attr).get(value));	
+
+	private void setAttribute(Attribute attr, AttributeValue value) {
+		this.attribCategorial.put(attr, attributeMap.get(attr).get(value));
 	}
 
-	private void setAttribute(Attribute attr, double value){
-		this.attribNumerical.put(attr, value);	
+	private void setAttribute(Attribute attr, double value) {
+		this.attribNumerical.put(attr, value);
 	}
 
-	public double getAttribute(Attribute attr){
-		if(attribCategorial.containsKey(attr)){
+	public double getAttribute(Attribute attr) {
+		if (attribCategorial.containsKey(attr)) {
 			return this.attribCategorial.get(attr);
 		} else {
 			return this.attribNumerical.get(attr);
@@ -185,24 +185,24 @@ public class Project {
 		double similarity = 1 - Math.sqrt(distance/(attribCategorial.size() + attribNumerical.size()));
 		return similarity;
 	}
-	
+
 	/* see lecture 1 page 9. */
-	public double calculateEffort(List<Project> similarProjects){
+	public double calculateEffort(List<Project> similarProjects) {
 		return 0.0;
 	}
 
 	private AttributeValue stringToAttributeValue(String str) throws IllegalArgumentException{
-		if(str.equalsIgnoreCase("VERY_LOW")){
+		if (str.equalsIgnoreCase("VERY_LOW")) {
 			return AttributeValue.VERY_LOW;
-		} else if(str.equalsIgnoreCase("LOW")){
+		} else if (str.equalsIgnoreCase("LOW")) {
 			return AttributeValue.LOW;
-		} else if(str.equalsIgnoreCase("NOMINAL")){
+		} else if (str.equalsIgnoreCase("NOMINAL")) {
 			return AttributeValue.NOMINAL;
-		} else if(str.equalsIgnoreCase("HIGH")){
+		} else if (str.equalsIgnoreCase("HIGH")) {
 			return AttributeValue.HIGH;
-		} else if(str.equalsIgnoreCase("VERY_HIGH")){
+		} else if (str.equalsIgnoreCase("VERY_HIGH")) {
 			return AttributeValue.VERY_HIGH;
-		} else if(str.equalsIgnoreCase("EXTRA_HIGH")){
+		} else if (str.equalsIgnoreCase("EXTRA_HIGH")) {
 			return AttributeValue.EXTRA_HIGH;
 		} else {
 			throw new IllegalArgumentException("Unsupported attibute value: " + str);

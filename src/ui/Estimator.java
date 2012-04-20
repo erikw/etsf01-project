@@ -90,11 +90,12 @@ public class Estimator {
 		db.setThreshold(threshold/100.0); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
 
 		for (String str : userAttribs) {
-			System.out.println("user attrib is: " + str);
+			System.out.println("User attribute is: " + str);
 		}
 		Project inputProject = new Project(userAttribs);
 
 		List<Project> similarProjects = db.similarProjects(inputProject);
+		System.out.println("Found " + similarProjects.size() + " similar project(s). ");
 
 		double estimatePM = db.getEstimate(similarProjects);
 		System.out.println("Time estimation is: " );
@@ -103,7 +104,6 @@ public class Estimator {
 		System.out.println("Person Months: " + estimatePM);
 		System.out.println("Person Years: " + db.PMonthsToPYears(estimatePM));
 
-		// TODO user inputProject in  algorithm.
 		// TODO Informera användaren om  det riktiga värdet är lägre än threshold
 	}
 
