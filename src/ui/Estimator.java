@@ -98,10 +98,10 @@ public class Estimator {
 
 		double estimatePM = db.getEstimate(similarProjects);
 		System.out.println("Time estimation is: " );
-		System.out.println("Person Hour" + db.PMonthsToPHours(estimatePM));
-		System.out.println("Person Days" + db.PMonthsToPDays(estimatePM));
-		System.out.println("Person Months" + estimatePM);
-		System.out.println("Person Years" + db.PMonthsToPYears(estimatePM));
+		System.out.println("Person Hour: " + db.PMonthsToPHours(estimatePM));
+		System.out.println("Person Days: " + db.PMonthsToPDays(estimatePM));
+		System.out.println("Person Months: " + estimatePM);
+		System.out.println("Person Years: " + db.PMonthsToPYears(estimatePM));
 
 		// TODO user inputProject in  algorithm.
 		// TODO Informera användaren om  det riktiga värdet är lägre än threshold
