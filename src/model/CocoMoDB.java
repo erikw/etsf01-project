@@ -1,7 +1,6 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class CocoMoDB implements ProjectDB  {
 	private ArrayList<Project> refProjects;
@@ -61,6 +60,33 @@ public class CocoMoDB implements ProjectDB  {
 			//// do calc lolz
 		//}
 		return 0.0;
+	}
+
+	public List<Project> similarProjects(Project inputProject) {
+		LinkedList<Project> projects = new LinkedList<Project>();	
+		for (Project p : refProjects) {
+			if (p.calculateSimilarity(inputProject, this) > threshold) {
+				projects.add(p);
+			}
+		}
+		return projects;
+	}
+
+	// Returns person months.
+	public double getEstimate(List<Project> similarProjects) {
+		return 0;
+	}
+
+	public double PMonthsToPHours(double pm) {
+		return pm * 168;
+	}
+
+	public double PMonthsToPDays(double pm) {
+		return pm * 21;
+	}
+
+	public double PMonthsToPYears(double pm) {
+		return pm / 12;
 	}
 
 	private ArrayList<Double> atrToValue(ArrayList<String> toBeMapped){
