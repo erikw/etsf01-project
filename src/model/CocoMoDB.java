@@ -10,26 +10,6 @@ public class CocoMoDB implements ProjectDB  {
 	private double pred;
 
 	private HashMap<String,Integer> attributes = new HashMap<String, Integer>(); 
-
-	private Map<Map>
-
-	/*private double[][] values = {
-		{ 0.75, 0.88, 1.00, 1.15, 1.40, 0   },
-		{ 0,    0.94, 1.00, 1.08, 1.16, 0   },
-		{ 0.70, 0.85, 1.00, 1.15, 1.30, 1.65}, 
-		{ 0,    0,    1.00, 1.11, 1.30, 1.66},
-		{ 0,    0,    1.00, 1.06, 1.21, 1.56},
-		{ 0,    0.87, 1.00, 1.15, 1.30, 0   },
-		{ 0,    0.87, 1.00, 1.07, 1.15, 0   }, 
-		{ 1.46, 1.19, 1.00, 0.86, 0.71, 0   },
-		{ 1.29, 1.13, 1.00, 0.91, 0.82, 0   },
-		{ 1.42, 1.17, 1.00, 0.86, 0.70, 0   },
-		{ 1.21, 1.10, 1.00, 0.90, 0,    0   }, 
-		{ 1.14, 1.07, 1.00, 0.95, 0,    0   },
-		{ 1.24, 1.10, 1.00, 0.91, 0.82, 0   },
-		{ 1.24, 1.10, 1.00, 0.91, 0.83, 0   },
-		{ 1.23, 1.08, 1.00, 1.04, 1.10, 0   } }; 
-*/
 	
 	public CocoMoDB(){
 		refProjects = new ArrayList<Project>();
@@ -57,12 +37,14 @@ public class CocoMoDB implements ProjectDB  {
 		return threshold;
 	}
 
+/*
 	private double eucLength(Project source){
 		//for(Double d : atrToValue(source.getList())){
 			//// do calc lolz
 		//}
 		return 0.0;
 	}
+*/
 
 	public List<Project> similarProjects(Project inputProject) {
 		LinkedList<Project> projects = new LinkedList<Project>();	
@@ -91,6 +73,7 @@ public class CocoMoDB implements ProjectDB  {
 		return pm / 12;
 	}
 
+/*
 	private ArrayList<Double> atrToValue(ArrayList<String> toBeMapped){
 		ArrayList<Double> atr = new ArrayList<Double>();
 		for(int i = 0; i < toBeMapped.size()-2; i++ ){
@@ -98,7 +81,7 @@ public class CocoMoDB implements ProjectDB  {
 		}
 		return atr;
 	}
-
+*/
 
 	public double getMaxAttrib(Project.Attribute attr) {
 		double max = 0;
@@ -123,5 +106,4 @@ public class CocoMoDB implements ProjectDB  {
 		}
 		return min;
 	}
-
 }
