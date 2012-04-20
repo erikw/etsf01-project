@@ -18,6 +18,7 @@ parameters[${#parameters[*]}]=1		# "TOOL", {"Nominal","High","Very_High","Very_L
 parameters[${#parameters[*]}]=1		# "SCED", {"Low","Nominal","High"}
 parameters[${#parameters[*]}]=100 	# "LOC", numeric
 parameters[${#parameters[*]}]=20	# "ACT_EFFORT", numeric
+parameters[${#parameters[*]}]=70	# "Threshold", numeric [0, 100]
 
 for parameter in ${parameters[*]};
 do
