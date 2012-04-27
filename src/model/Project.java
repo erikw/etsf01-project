@@ -154,6 +154,14 @@ public class Project {
 		}
 	}
 
+	// For testing
+	public Project(double actEffort, double loc) {
+		this.attribCategorial = new HashMap<Attribute, Double>();
+		this.attribNumerical = new HashMap<Attribute, Double>();
+		this.setAttribute(Attribute.ACT_EFFORT, actEffort);
+		this.setAttribute(Attribute.LOC, loc);
+	}
+
 	private void setAttribute(Attribute attr, AttributeValue value) {
 		this.attribCategorial.put(attr, attributeMap.get(attr).get(value));
 	}
@@ -189,8 +197,19 @@ public class Project {
 	}
 
 	/* see lecture 1 page 9. */
-	public double calculateEffort(List<Project> similarProjects) {
-		return 0.0;
+	// TODO: test this shit
+	public double calculateEffort(Map<Double, Project> similarProjects) {
+		double totalSimilarity = 0;
+		for(double similarity : similarProjects.keySet()){
+			totalSimilarity += similarity;
+		}
+		double effort = 0;
+		for(Map.Entry<Double, Project> simProj : similarProjects.entrySet()){
+			effort += this.getAttribute(Attribute.LOC)/simProj.getValue().getAttribute(Attribute.LOC)*
+				simProj.getValue().getAttribute(Attribute.ACT_EFFORT)*
+				simProj.getKey()/totalSimilarity;
+		}
+		return effort;
 	}
 
 	private AttributeValue stringToAttributeValue(String str) throws IllegalArgumentException{

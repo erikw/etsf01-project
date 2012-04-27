@@ -25,6 +25,7 @@ public class CocoMoDB implements ProjectDB  {
 		refProjects.add(proj);
 	}
 
+	// remove
 	public ArrayList<Project> getSimilar(Project proj){
 		return refProjects;
 	}
@@ -46,18 +47,20 @@ public class CocoMoDB implements ProjectDB  {
 	}
 */
 
-	public List<Project> similarProjects(Project inputProject) {
-		LinkedList<Project> projects = new LinkedList<Project>();	
+	public Map<Double, Project> similarProjects(Project inputProject) {
+		//LinkedList<Project> projects = new LinkedList<Project>();
+		HashMap<Double, Project> projects = new HashMap<Double, Project>();
+		double tmpSim;
 		for (Project p : refProjects) {
-			if (p.calculateSimilarity(inputProject, this) >= threshold) {
-				projects.add(p);
+			if ((tmpSim = p.calculateSimilarity(inputProject, this)) > threshold) {
+				projects.put(tmpSim, p);
 			}
 		}
 		return projects;
 	}
 
 	// Returns person months.
-	public double getEstimate(List<Project> similarProjects) {
+	public double getEstimate(Map<Double,Project> similarProjects) {
 		return 0;
 	}
 

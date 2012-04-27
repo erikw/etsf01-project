@@ -16,8 +16,8 @@ public class MockDB implements ProjectDB {
 	public void setThreshold(double newThreshold) {
 	}
 
-	public List<Project> similarProjects(Project inputProject) {
-		return new LinkedList<Project>();
+	public Map<Double, Project> similarProjects(Project inputProject) {
+		return new HashMap<Double, Project>();
 	}
 
 	public double getMaxAttrib(Project.Attribute attr) {return 0;}
@@ -26,7 +26,7 @@ public class MockDB implements ProjectDB {
 	public double PMonthsToPDays(double pm) {return 0;}
 	public double PMonthsToPYears(double pm) {return 0;}
 	public double getThreshold() { return 0;}
-	public double getEstimate(List<Project> similarProjects) {
+	public double getEstimate(Map<Double, Project> similarProjects) {
 		return 0.0;
 	}
 }

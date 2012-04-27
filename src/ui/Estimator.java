@@ -103,6 +103,7 @@ public class Estimator {
 		}
 		Project inputProject = new Project(userAttribs);
 
+		Map<Double, Project> similarProjects = db.similarProjects(inputProject);
 		List<Project> similarProjects = db.similarProjects(inputProject);
 		if(similarProjects.size() == 0){
 	
