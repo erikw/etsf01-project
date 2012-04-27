@@ -22,6 +22,8 @@ public class Estimator {
 		System.out.println("  88    dP__Yb  88\"Yb   8I  dY     o.'Y8b Yb b dP Y8   8P  dP__Yb   8I  dY");
 		System.out.println("  88   dP\"\"\"\"Yb 88  Yb 8888Y\"      8bodP'  '\"YoYo 'YbodP' dP\"\"\"\"Yb 8888Y");
 		System.out.println("");
+		System.out.println("Press CTRL+C to terminate program");
+		System.out.println("");
 		if (args.length != 1) {
 			System.err.println("Missing file name.");
 			System.exit(1);
