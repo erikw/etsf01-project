@@ -106,7 +106,6 @@ public class Estimator {
 		Project inputProject = new Project(userAttribs);
 
 		Map<Double, Project> similarProjects = db.similarProjects(inputProject);
-		List<Project> similarProjects = db.similarProjects(inputProject);
 		if(similarProjects.size() == 0){
 	
 			System.err.println("\u001B[31m\u001B[1mWARNING! No projects within given threshold\u001B[0m");
