@@ -179,7 +179,9 @@ public class Project {
 		}
 
 		for (Attribute a : attribNumerical.keySet()) {
-			distance += Math.pow((attribNumerical.get(a) - rhs.getAttribute(a)) / (db.getMaxAttrib(a) - db.getMinAttrib(a)) , 2);
+			double max = Math.max(rhs.getAttribute(a), db.getMaxAttrib(a));
+			double min = Math.min(rhs.getAttribute(a), db.getMinAttrib(a));
+			distance += Math.pow((attribNumerical.get(a) - rhs.getAttribute(a)) / ( max - min) , 2);
 		}
 
 		double similarity = 1 - Math.sqrt(distance/(attribCategorial.size() + attribNumerical.size()));
