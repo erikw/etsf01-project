@@ -76,13 +76,13 @@ public class Estimator {
 			userAttribs.add(values[number]);
 		}
 		System.out.println("LOC, enter number:");
-		getDoubleInput(sc, userAttribs);
+		getDoubleInput(userAttribs);
 		System.out.println("ACT_EFFORT, enter number:");
-		getDoubleInput(sc, userAttribs);
+		getDoubleInput(userAttribs);
 		double threshold;
 		do {
 			System.out.println("Threshold, enter number(0-100):");
-			threshold = getDoubleInput(sc, new ArrayList<String>());	
+			threshold = getDoubleInput(new ArrayList<String>());	
 		} while (threshold < 0 || threshold > 100);
 		db.setThreshold(threshold/100.0); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
 
@@ -118,7 +118,8 @@ public class Estimator {
 
 
 	
-	private double getDoubleInput(Scanner sc, ArrayList<String> userAttribs){
+	private double getDoubleInput(ArrayList<String> userAttribs){
+		Scanner sc = new Scanner(System.in);
 		boolean correct = false;
 		double number = 0.0;
 		while (!correct) {
