@@ -49,7 +49,7 @@ public class CocoMoDB implements ProjectDB  {
 	public List<Project> similarProjects(Project inputProject) {
 		LinkedList<Project> projects = new LinkedList<Project>();	
 		for (Project p : refProjects) {
-			if (p.calculateSimilarity(inputProject, this) > threshold) {
+			if (p.calculateSimilarity(inputProject, this) >= threshold) {
 				projects.add(p);
 			}
 		}
