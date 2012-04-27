@@ -77,11 +77,12 @@ public class Estimator {
 					if (number >= 0 && number < values.length) {
 						correct = true;
 					} else {
+						sc.nextLine(); // Skip bad line.
 						System.err.println("Bad number, try again.");
 					}
 				} else {
+					sc.nextLine(); // Skip bad line.
 					System.err.println("Type number.");
-					//sc = new Scanner(System.in);
 				}
 			}
 			userAttribs.add(values[number]);
@@ -140,8 +141,8 @@ public class Estimator {
 				number = sc.nextDouble();
 				userAttribs.add(String.valueOf(number));
 			} else {
+				sc.nextLine(); // Skip bad line.
 				System.err.println("Bad number, try again.");
-				//sc = new Scanner(System.in);
 			}
 		}
 		return number;
