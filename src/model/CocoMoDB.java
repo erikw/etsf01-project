@@ -52,7 +52,7 @@ public class CocoMoDB implements ProjectDB  {
 		HashMap<Double, Project> projects = new HashMap<Double, Project>();
 		double tmpSim;
 		for (Project p : refProjects) {
-			if ((tmpSim = p.calculateSimilarity(inputProject, this)) > threshold) {
+			if ((tmpSim = p.calculateSimilarity(inputProject, this)) >= threshold) {
 				projects.put(tmpSim, p);
 			}
 		}
