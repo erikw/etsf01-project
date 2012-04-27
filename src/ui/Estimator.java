@@ -11,6 +11,17 @@ public class Estimator {
 
 	public static void main (String [] args)
 	{
+		System.out.println("");
+		System.out.println(" dP\"\"b8 88\"\"Yb 888888    db    888888 888888 8888b.      88\"\"Yb Yb  dP");
+		System.out.println("dP   '\" 88__dP 88__     dPYb     88   88__    8I  Yb     88__dP  YbdP");
+		System.out.println("Yb      88\"Yb  88\"\"    dP__Yb    88   88\"\"    8I  dY     88\"\"Yb   8P");
+		System.out.println(" YboodP 88  Yb 888888 dP\"\"\"\"Yb   88   888888 8888Y\"      88oodP  dP");
+		System.out.println("");
+		System.out.println("888888    db    88\"\"Yb 8888b.      .dP\"Y8  dP\"Yb  88   88    db    8888b.");
+		System.out.println("  88     dPYb   88__dP  8I  Yb     'Ybo.\" dP   Yb 88   88   dPYb    8I  Yb");
+		System.out.println("  88    dP__Yb  88\"Yb   8I  dY     o.'Y8b Yb b dP Y8   8P  dP__Yb   8I  dY");
+		System.out.println("  88   dP\"\"\"\"Yb 88  Yb 8888Y\"      8bodP'  '\"YoYo 'YbodP' dP\"\"\"\"Yb 8888Y");
+		System.out.println("");
 		if (args.length != 1) {
 			System.err.println("Missing file name.");
 			System.exit(1);
@@ -138,6 +149,6 @@ public class Estimator {
 
 	public int getEstimate(String[] params) {
 		return 0;
-
 	}
+
 }
