@@ -32,7 +32,7 @@ public class TestQR03 {
 		int numbergreat = 0;
 		for (int i = 0; i < projects.size(); i++) {
 			ProjectDB db = new CocoMoDB();
-			db.setThreshold(0);
+			db.setThreshold(0.35);
 			Project temp = projects.remove(0);
 			for (Project proj : projects) {
 				db.addProject(proj);
