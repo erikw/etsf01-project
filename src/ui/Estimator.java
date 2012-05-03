@@ -11,6 +11,8 @@ public class Estimator {
 
 	public static void main (String [] args)
 	{
+		Locale.setDefault(new Locale("en", "US")); // Use a sane locale.
+
 		System.out.println("");
 		System.out.println(" dP\"\"b8 88\"\"Yb 888888    db    888888 888888 8888b.      88\"\"Yb Yb  dP");
 		System.out.println("dP   '\" 88__dP 88__     dPYb     88   88__    8I  Yb     88__dP  YbdP");
