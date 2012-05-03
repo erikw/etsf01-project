@@ -9,7 +9,6 @@ import java.util.EnumSet;
 import java.lang.IllegalArgumentException;
 
 public class Project {
-	private Map<Attribute, Double> attributes;
 	private Map<Attribute, Double> attribCategorial;
 	private Map<Attribute, Double> attribNumerical;
 

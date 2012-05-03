@@ -26,7 +26,4 @@ public class MockDB implements ProjectDB {
 	public double PMonthsToPDays(double pm) {return 0;}
 	public double PMonthsToPYears(double pm) {return 0;}
 	public double getThreshold() { return 0;}
-	public double getEstimate(Map<Double, Project> similarProjects) {
-		return 0.0;
-	}
 }

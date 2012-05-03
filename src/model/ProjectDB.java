@@ -11,7 +11,6 @@ public interface ProjectDB {
 	public double getMaxAttrib(Project.Attribute attr);
 	public double getMinAttrib(Project.Attribute attr);
 	public List<Result> similarProjects(Project inputProject);
-	public double getEstimate(Map<Double, Project> similarProjects);
 
 	public double PMonthsToPHours(double pm);
 	public double PMonthsToPDays(double pm);

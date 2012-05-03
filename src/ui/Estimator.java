@@ -56,11 +56,8 @@ public class Estimator {
 			attribs.put("MODP", new String[] {"Low","Nominal","High","Very_High"});
 			attribs.put("TOOL", new String[] {"Very_Low","Low","Nominal","High","Very_High"});
 			attribs.put("SCED", new String[] {"Low","Nominal","High"});
-			//attribs.put("LOC",  new String[] {"numeric"});
-			//attribs.put("ACT_EFFORT", new String[] {"numeric"});
-		} catch(IOException e){
-			e.printStackTrace();
-			//System.err.println("File not found.");
+		} catch(IOException e) {
+			System.err.println("File not found.");
 			System.exit(1);
 		}
 	}
@@ -93,8 +90,7 @@ public class Estimator {
 		}
 		System.out.println("LOC, enter number:");
 		getDoubleInput(sc, userAttribs);
-		System.out.println("ACT_EFFORT, enter number:");
-		getDoubleInput(sc, userAttribs);
+		userAttribs.add("0.0"); // Actual effort for input is not used
 		double threshold;
 		do {
 			System.out.println("Threshold, enter number in range [0,1]:");

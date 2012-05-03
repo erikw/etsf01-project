@@ -10,9 +10,4 @@ public class Result {
 		this.project = project;
 	
 	}
-	
-	
-	
-	
-
 }

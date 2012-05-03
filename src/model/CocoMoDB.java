@@ -59,11 +59,6 @@ public class CocoMoDB implements ProjectDB  {
 		return projects;
 	}
 
-	// Returns person months.
-	public double getEstimate(Map<Double,Project> similarProjects) {
-		return 0;
-	}
-
 	public double PMonthsToPHours(double pm) {
 		return pm * 168;
 	}
