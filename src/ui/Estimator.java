@@ -34,7 +34,6 @@ public class Estimator {
 			System.exit(1);
 		} else {
 			Estimator est = new Estimator(args[0]);
-			est.getUserAttributes();
 			est.getParams();
 			System.exit(0);
 		}
@@ -43,6 +42,7 @@ public class Estimator {
 	public Estimator(String fileName) {
 		try {
 			db = new CocoMoDB();
+			this.getUserAttributes();
 			Parser parser = new Parser(db);
 			parser.parse(fileName);
 			attribs = new LinkedHashMap<String, String[]>();
@@ -61,17 +61,78 @@ public class Estimator {
 			attribs.put("MODP", new String[] {"Low","Nominal","High","Very_High"});
 			attribs.put("TOOL", new String[] {"Very_Low","Low","Nominal","High","Very_High"});
 			attribs.put("SCED", new String[] {"Low","Nominal","High"});
-		} catch(IOException e) {
+			attribs.put("LOC", new String[0]);
+			if(Project.containsAttribute(Project.Attribute.USER1)){
+				if(Project.isNumericalAttribute(Project.Attribute.USER1)){
+					attribs.put("USER1", new String[0]);
+				} else {
+					attribs.put("USER1", new String[] {"Very_Low","Low","Nominal","High","Very_High", "Extra_High"});
+				}
+			}
+			if(Project.containsAttribute(Project.Attribute.USER2)){
+				if(Project.isNumericalAttribute(Project.Attribute.USER2)){
+					attribs.put("USER2", new String[0]);
+				} else {
+					attribs.put("USER2", new String[] {"Very_Low","Low","Nominal","High","Very_High", "Extra_High"});
+				}
+			}
+			if(Project.containsAttribute(Project.Attribute.USER3)){
+				if(Project.isNumericalAttribute(Project.Attribute.USER3)){
+					attribs.put("USER3", new String[0]);
+				} else {
+					attribs.put("USER3", new String[] {"Very_Low","Low","Nominal","High","Very_High", "Extra_High"});
+				}
+			}
+		} catch(IOException e){
 			System.err.println("File not found.");
 			System.exit(1);
 		}
+	}
+
+	private void getAndAddUserAttr(Ini newAttribs, Project.Attribute attr, String sec){
+		String type = newAttribs.get(sec, "type");
+		if(type == null){
+			return;
+		}
+		if(type.equals("num")){
+			Project.addUserAttribute(attr, new HashMap<Project.AttributeValue, Double>());
+		} else if(type.equals("cat")) {
+			double vl = newAttribs.get(sec, "very_low", double.class);
+			double l = newAttribs.get(sec, "low", double.class);
+			double n = newAttribs.get(sec, "nominal", double.class);
+			double h = newAttribs.get(sec, "high", double.class);
+			double vh = newAttribs.get(sec, "very_high", double.class);
+			double eh = newAttribs.get(sec, "extra_high", double.class);
+			HashMap<Project.AttributeValue, Double> useratts = new HashMap<Project.AttributeValue, Double>();
+			if(vl > 0.0){
+				useratts.put(Project.AttributeValue.VERY_LOW, vl);
+			}
+			if(l > 0.0){
+				useratts.put(Project.AttributeValue.LOW, l);
+			}
+			if(n > 0.0){
+				useratts.put(Project.AttributeValue.NOMINAL, n);
+			}
+			if(h > 0.0){
+				useratts.put(Project.AttributeValue.HIGH, h);
+			}
+			if(vh > 0.0){
+				useratts.put(Project.AttributeValue.VERY_HIGH, vh);
+			}
+			if(eh > 0.0){
+				useratts.put(Project.AttributeValue.EXTRA_HIGH, eh);
+			}
+			Project.addUserAttribute(attr, useratts);
+		} else {System.out.println("ERROR incorrect type of user attribute: " + sec);}
+
 	}
 	
 	public void getUserAttributes(){
 		try {
 			Ini newAttribs = new Ini(new File("extra.ini"));
-			double val = newAttribs.get("testsec", "testatt", double.class);
-			System.out.println("VAL> " + val);
+			getAndAddUserAttr(newAttribs, Project.Attribute.USER1, "user1");
+			getAndAddUserAttr(newAttribs, Project.Attribute.USER2, "user2");
+			getAndAddUserAttr(newAttribs, Project.Attribute.USER3, "user3");
 		} catch (IOException e) {
 			System.out.println("Could not find any extra attributes. Only using standard attributes.");
 		}
@@ -86,12 +147,19 @@ public class Estimator {
 			printVal(values);
 			boolean correct = false;
 			int number = 0;
+			double numericalValue = 0.0;
 			while (!correct) {
 				System.out.print("> ");
-				if (sc.hasNextInt()) {
+				// Must check if double first!!
+				if (sc.hasNextDouble() && values.length == 0) {
+					numericalValue = sc.nextDouble();
+					userAttribs.add(""+numericalValue);
+					correct = true;
+				} else if (sc.hasNextInt()) {
 					number = sc.nextInt();
 					if (number >= 0 && number < values.length) {
 						correct = true;
+						userAttribs.add(values[number]);
 					} else {
 						sc.nextLine(); // Skip bad line.
 						System.err.println("Bad number, try again.");
@@ -101,11 +169,13 @@ public class Estimator {
 					System.err.println("Type number.");
 				}
 			}
-			userAttribs.add(values[number]);
 		}
-		System.out.println("LOC, enter number:");
-		getDoubleInput(sc, userAttribs);
-		userAttribs.add("0.0"); // Actual effort for input is not used
+		if(userAttribs.size() < 17){
+			userAttribs.add("0.0");
+		} else {
+			userAttribs.add(16, "0.0");
+		}
+
 		double threshold;
 		do {
 			System.out.println("Threshold, enter number in range [0,1]:");
@@ -113,9 +183,6 @@ public class Estimator {
 		} while (threshold < 0 || threshold > 1);
 		db.setThreshold(threshold); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
 
-		for (String str : userAttribs) {
-			//System.out.println("User attribute is: " + str);
-		}
 		Project inputProject = new Project(userAttribs);
 
 		ArrayList<Result> similarProjects = (ArrayList<Result>) db.similarProjects(inputProject);

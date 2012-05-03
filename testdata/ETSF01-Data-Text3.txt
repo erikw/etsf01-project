@@ -1,0 +1,5 @@
+Nominal,High,Very_High,Nominal,Nominal,Low,Nominal,High,Nominal,Very_High,Low,Nominal,High,Nominal,Low,70,278,0.0,0.0,0.0,                           %	instance number:	1,
+Very_High,High,High,Very_High,Very_High,Nominal,Nominal,Very_High,Very_High,Very_High,Nominal,High,High,High,Low,227,1181,0,0,0,               %	instance number:	2,
+Nominal,High,High,Very_High,High,Low,High,High,Nominal,High,Low,High,High,Nominal,Low,177.9,1248,0,0,0,                                        %	instance number:	3,
+High,Low,High,Nominal,Nominal,Low,Low,Nominal,Nominal,Nominal,Nominal,High,High,Nominal,Low,115.8,480,0,0,0,                                   %	instance number:	4,
+High,Low,High,Nominal,Nominal,Low,Low,Nominal,Nominal,Nominal,Nominal,High,High,Nominal,Low,29.5,120,0,0,0,                                    %	instance number:	5,

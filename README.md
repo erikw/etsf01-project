@@ -18,6 +18,12 @@ Compile and run by typing the following commands:
 The first `estimator.sh` command will present an interactive interface where you will answer the questions about you project, enter threshold and you will get estimates for your project. In the seconds form a static configuration from the script `config.sh` will be fed to the program. You can edit the values in that script your self.
 
 
+## Specify extra attributes
+To add extra attributes:
+ * Create a file extra.ini
+ * Add sections user1, user2, user3 as you wish.
+ * Add values in database file. There must be at least 17 values, any values after these 17 will be mapped to the extra attributes.
+
 ##Contributors
 
 [Oscar Olsson](https://github.com/DrunkenInfant)

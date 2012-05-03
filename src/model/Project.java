@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Iterator;
 import java.util.EnumSet;
@@ -13,14 +14,14 @@ public class Project {
 	private Map<Attribute, Double> attribNumerical;
 
 	public enum Attribute { RELY, DATA, CPLX, TIME, STOR, VIRT, TURN, ACAP, AEXP, PCAP,
-		VEXP, LEXP, MODP, TOOL, SCED, LOC, ACT_EFFORT}
+		VEXP, LEXP, MODP, TOOL, SCED, LOC, ACT_EFFORT, USER1, USER2, USER3}
 
 	public enum AttributeValue { VERY_LOW, LOW, NOMINAL, HIGH, VERY_HIGH, EXTRA_HIGH }
 
-	private static HashMap<Attribute, HashMap<AttributeValue, Double>> attributeMap = new HashMap<Attribute, HashMap<AttributeValue, Double>>();
+	private static LinkedHashMap<Attribute, HashMap<AttributeValue, Double>> attributeMap = new LinkedHashMap<Attribute, HashMap<AttributeValue, Double>>();
 
 	static {
-		for (Attribute attribute : Attribute.values()) {
+		for (Attribute attribute : EnumSet.range(Attribute.RELY, Attribute.ACT_EFFORT)) {
 			attributeMap.put(attribute, new HashMap<AttributeValue, Double>());
 		}
 
@@ -135,20 +136,20 @@ public class Project {
 		attribCategorial = new HashMap<Attribute, Double>();
 		attribNumerical = new HashMap<Attribute, Double>();
 		Iterator<String> iter = attributes.iterator();
-		for (Attribute att : EnumSet.range(Attribute.RELY, Attribute.SCED)) {
-			try {
-				attribCategorial.put(att, attributeMap.get(att).
-						get(stringToAttributeValue(iter.next())));
-			} catch (IllegalArgumentException nfe) {
-				nfe.printStackTrace();
-			}
-		}
-
-		for (Attribute att : EnumSet.range(Attribute.LOC, Attribute.ACT_EFFORT)) {
-			try {
-				attribNumerical.put(att, Double.parseDouble(iter.next()));
-			} catch (NumberFormatException nfe) {
-				nfe.printStackTrace();
+		for (Attribute att : attributeMap.keySet()) {
+			if(Project.isNumericalAttribute(att)){
+				try {
+					attribNumerical.put(att, Double.parseDouble(iter.next()));
+				} catch (NumberFormatException nfe) {
+					nfe.printStackTrace();
+				}
+			} else {
+				try {
+					attribCategorial.put(att, attributeMap.get(att).
+							get(stringToAttributeValue(iter.next())));
+				} catch (IllegalArgumentException nfe) {
+					nfe.printStackTrace();
+				}
 			}
 		}
 	}
@@ -161,8 +162,16 @@ public class Project {
 		this.setAttribute(Attribute.LOC, loc);
 	}
 
-	public void addUserAttribute(Attribute attr, HashMap<AttributeValue, Double> values){
-		
+	public static void addUserAttribute(Attribute attr, HashMap<AttributeValue, Double> values){
+		attributeMap.put(attr, values);
+	}
+
+	public static boolean containsAttribute(Attribute attr){
+		return attributeMap.containsKey(attr);
+	}
+
+	public static boolean isNumericalAttribute(Attribute attr){
+		return attributeMap.get(attr).isEmpty();
 	}
 
 	private void setAttribute(Attribute attr, AttributeValue value) {
@@ -192,7 +201,9 @@ public class Project {
 		for (Attribute a : attribNumerical.keySet()) {
 			double max = Math.max(rhs.getAttribute(a), db.getMaxAttrib(a));
 			double min = Math.min(rhs.getAttribute(a), db.getMinAttrib(a));
-			distance += Math.pow((attribNumerical.get(a) - rhs.getAttribute(a)) / ( max - min) , 2);
+			if ((max - min) != 0.0) {
+				distance += Math.pow((attribNumerical.get(a) - rhs.getAttribute(a)) / ( max - min) , 2);
+			}
 		}
 
 		double similarity = 1 - Math.sqrt(distance/(attribCategorial.size() + attribNumerical.size()));
