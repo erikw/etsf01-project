@@ -18,7 +18,7 @@ parameters[${#parameters[*]}]=0		# TOOL, {"Very_Low","Low","Nominal","High","Ver
 parameters[${#parameters[*]}]=0		# SCED, {"Low","Nominal","High"}
 parameters[${#parameters[*]}]=100	# LOC, numeric
 parameters[${#parameters[*]}]=20	# ACT_EFFORT, numeric
-parameters[${#parameters[*]}]=50	# Threshold, numeric [0, 100]
+parameters[${#parameters[*]}]=0.1	# Threshold, numeric [0, 1]
 
 for parameter in ${parameters[*]};
 do

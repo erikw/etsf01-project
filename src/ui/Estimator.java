@@ -97,10 +97,10 @@ public class Estimator {
 		getDoubleInput(sc, userAttribs);
 		double threshold;
 		do {
-			System.out.println("Threshold, enter number(0-100):");
+			System.out.println("Threshold, enter number in range [0,1]:");
 			threshold = getDoubleInput(sc, new ArrayList<String>());	
-		} while (threshold < 0 || threshold > 100);
-		db.setThreshold(threshold/100.0); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
+		} while (threshold < 0 || threshold > 1);
+		db.setThreshold(threshold); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
 
 		for (String str : userAttribs) {
 			System.out.println("User attribute is: " + str);
