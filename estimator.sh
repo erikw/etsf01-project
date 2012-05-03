@@ -7,4 +7,4 @@ else
 	data_file="testdata/ETSF01-Data-Text.txt"
 fi
 
-java -cp bin ui.Estimator $data_file
+java -cp lib/ini4j.jar:bin ui.Estimator $data_file

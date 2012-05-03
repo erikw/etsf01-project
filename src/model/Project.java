@@ -161,6 +161,10 @@ public class Project {
 		this.setAttribute(Attribute.LOC, loc);
 	}
 
+	public void addUserAttribute(Attribute attr, HashMap<AttributeValue, Double> values){
+		
+	}
+
 	private void setAttribute(Attribute attr, AttributeValue value) {
 		this.attribCategorial.put(attr, attributeMap.get(attr).get(value));
 	}

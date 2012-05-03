@@ -5,6 +5,9 @@ import io.*;
 import java.util.*;
 import java.io.*;
 
+import org.ini4j.Ini;
+
+
 public class Estimator {
 	private ProjectDB db;
 	private Map<String, String[]> attribs;
@@ -30,7 +33,9 @@ public class Estimator {
 			System.err.println("Missing file name.");
 			System.exit(1);
 		} else {
-			new Estimator(args[0]).getParams();
+			Estimator est = new Estimator(args[0]);
+			est.getUserAttributes();
+			est.getParams();
 			System.exit(0);
 		}
 	}
@@ -59,6 +64,16 @@ public class Estimator {
 		} catch(IOException e) {
 			System.err.println("File not found.");
 			System.exit(1);
+		}
+	}
+	
+	public void getUserAttributes(){
+		try {
+			Ini newAttribs = new Ini(new File("extra.ini"));
+			double val = newAttribs.get("testsec", "testatt", double.class);
+			System.out.println("VAL> " + val);
+		} catch (IOException e) {
+			System.out.println("Could not find any extra attributes. Only using standard attributes.");
 		}
 	}
 
@@ -99,7 +114,7 @@ public class Estimator {
 		db.setThreshold(threshold); //Skickar in en tom ArrayList för att inte Threshold ska läggas till userAttributes.
 
 		for (String str : userAttribs) {
-			System.out.println("User attribute is: " + str);
+			//System.out.println("User attribute is: " + str);
 		}
 		Project inputProject = new Project(userAttribs);
 
@@ -107,8 +122,7 @@ public class Estimator {
 		if(similarProjects.size() == 0){
 	
 			System.err.println("\u001B[31m\u001B[1mWARNING! No projects within given threshold\u001B[0m");
-		}
-		else{
+		} else {
 			System.out.println("Found " + similarProjects.size() + " similar project(s). ");
 		}
 
@@ -124,10 +138,8 @@ public class Estimator {
 	private void printVal(String[] values) {
 		for (int i = 0; i < values.length; ++i) {
 			System.out.println(i  + ". " + values[i]);
+			}
 		}
-	}
-
-
 	
 	private double getDoubleInput(Scanner sc, ArrayList<String> userAttribs){
 		//Scanner sc = new Scanner(System.in);
@@ -146,9 +158,4 @@ public class Estimator {
 		}
 		return number;
 	}
-
-	public int getEstimate(String[] params) {
-		return 0;
-	}
-
 }

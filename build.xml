@@ -19,11 +19,13 @@
 
 	<!-- Library versions in use. Please update path externalLibs if you add/remove from here.-->
 	<property name="junit" value="junit-4.10.jar" />
+	<property name="ini4j" value="ini4j.jar" />
 
 	<!-- *** Paths *** -->
 	<path id="externalLibs">
 		<fileset dir="${path.library}">
 			<include name="${junit}" />
+			<include name="${ini4j}" />
 		</fileset>
 	</path>
 
