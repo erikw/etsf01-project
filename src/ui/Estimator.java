@@ -119,7 +119,6 @@ public class Estimator {
 		System.out.printf("Person Months: %.2f\n", estimatePM);
 		System.out.printf("Person Years: %.2f\n", db.PMonthsToPYears(estimatePM));
 
-		// TODO Informera användaren om  det riktiga värdet är lägre än threshold
 	}
 
 	private void printVal(String[] values) {
