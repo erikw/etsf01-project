@@ -115,11 +115,11 @@ public class Estimator {
 		}
 
 		double estimatePM = inputProject.calculateEffort(similarProjects);
-		System.out.println("Time estimation is: " );
-		System.out.println("Person Hour: " + db.PMonthsToPHours(estimatePM));
-		System.out.println("Person Days: " + db.PMonthsToPDays(estimatePM));
-		System.out.println("Person Months: " + estimatePM);
-		System.out.println("Person Years: " + db.PMonthsToPYears(estimatePM));
+		System.out.printf("Time estimation is: \n" );
+		System.out.printf("Person Hours: %.2f\n", db.PMonthsToPHours(estimatePM));
+		System.out.printf("Person Days: %.2f\n", db.PMonthsToPDays(estimatePM));
+		System.out.printf("Person Months: %.2f\n", estimatePM);
+		System.out.printf("Person Years: %.2f\n", db.PMonthsToPYears(estimatePM));
 
 		// TODO Informera användaren om  det riktiga värdet är lägre än threshold
 	}
