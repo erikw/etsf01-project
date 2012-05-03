@@ -47,13 +47,13 @@ public class CocoMoDB implements ProjectDB  {
 	}
 */
 
-	public Map<Double, Project> similarProjects(Project inputProject) {
+	public List<Result> similarProjects(Project inputProject) {
 		//LinkedList<Project> projects = new LinkedList<Project>();
-		HashMap<Double, Project> projects = new HashMap<Double, Project>();
+		ArrayList<Result> projects = new ArrayList<Result>();
 		double tmpSim;
 		for (Project p : refProjects) {
 			if ((tmpSim = p.calculateSimilarity(inputProject, this)) >= threshold) {
-				projects.put(tmpSim, p);
+				projects.add( new Result(tmpSim, p));
 			}
 		}
 		return projects;

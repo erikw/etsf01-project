@@ -198,16 +198,17 @@ public class Project {
 
 	/* see lecture 1 page 9. */
 	// TODO: test this shit
-	public double calculateEffort(Map<Double, Project> similarProjects) {
+	public double calculateEffort(ArrayList<Result> similarProjects) {
 		double totalSimilarity = 0;
-		for(double similarity : similarProjects.keySet()){
-			totalSimilarity += similarity;
+		for(Result similarity : similarProjects){
+			totalSimilarity += similarity.simularity;
 		}
 		double effort = 0;
-		for(Map.Entry<Double, Project> simProj : similarProjects.entrySet()){
-			effort += this.getAttribute(Attribute.LOC)/simProj.getValue().getAttribute(Attribute.LOC)*
-				simProj.getValue().getAttribute(Attribute.ACT_EFFORT)*
-				simProj.getKey()/totalSimilarity;
+		for(Result simResult : similarProjects){
+			Project simProj = simResult.project;
+			effort += this.getAttribute(Attribute.LOC)/simProj.getAttribute(Attribute.LOC)*
+				simProj.getAttribute(Attribute.ACT_EFFORT)*
+				simResult.simularity/totalSimilarity;
 		}
 		return effort;
 	}

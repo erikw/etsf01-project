@@ -10,7 +10,7 @@ public interface ProjectDB {
 	public double getThreshold();
 	public double getMaxAttrib(Project.Attribute attr);
 	public double getMinAttrib(Project.Attribute attr);
-	public Map<Double, Project> similarProjects(Project inputProject);
+	public List<Result> similarProjects(Project inputProject);
 	public double getEstimate(Map<Double, Project> similarProjects);
 
 	public double PMonthsToPHours(double pm);

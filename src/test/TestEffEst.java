@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 import model.*;
+
 import java.util.*;
 
 
@@ -13,7 +14,7 @@ public class TestEffEst {
 	Project current;
 	Project ret1;
 	Project ret2;
-	Map<Double, Project> similarProjects;
+	List<Result> similarProjects;
 		
 	public TestEffEst() {
 
@@ -25,9 +26,9 @@ public class TestEffEst {
 		ret1 = new Project(1000, 200);
 		ret2 = new Project(950, 175);
 
-		similarProjects = new HashMap<Double, Project>();
-		similarProjects.put(0.9, ret1);
-		similarProjects.put(0.5, ret2);
+		similarProjects = new ArrayList<Result>();
+		similarProjects.add(new Result(0.9, ret1));
+		similarProjects.add(new Result(0.5, ret2));
 	}
 
 	@After
@@ -37,6 +38,6 @@ public class TestEffEst {
 
 	@Test
 	public void testSimple() {
-		assertEquals(773, current.calculateEffort(similarProjects), 0.5);
+		assertEquals(773, current.calculateEffort((ArrayList<Result>) similarProjects), 0.5);
 	}
 }

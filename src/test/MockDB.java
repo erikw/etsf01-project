@@ -16,8 +16,8 @@ public class MockDB implements ProjectDB {
 	public void setThreshold(double newThreshold) {
 	}
 
-	public Map<Double, Project> similarProjects(Project inputProject) {
-		return new HashMap<Double, Project>();
+	public List<Result> similarProjects(Project inputProject) {
+		return new ArrayList<Result>();
 	}
 
 	public double getMaxAttrib(Project.Attribute attr) {return 0;}
