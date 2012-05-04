@@ -1,7 +1,16 @@
-
 [user1]
-type = num
+type=num
+
 [user2]
-type = num
+type=cat
+VERY_LOW=1.4
+NOMINAL=1.2
+
 [user3]
-type = num
+type=cat
+VERY_LOW=2.9
+LOW=3.0
+NOMINAL=4.0
+HIGH=4.5
+VERY_HIGH=5.0
+EXTRA_HIGH=7.0
