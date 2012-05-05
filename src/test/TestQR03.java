@@ -5,28 +5,19 @@ import static org.junit.Assert.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
-
-
-
-
-
 import io.Parser;
 import model.*;
 import model.Project.Attribute;
 
 public class TestQR03 {
-	
+
 	@Test
 	public void testQR03() {
-
 		Parser parser = new Parser();
 		try {
 			parser.parse("testdata/ETSF01-Data-Text.txt");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			fail("Parser fail.");
+			fail("Parser failed to read test file..");
 		}
 		ArrayList<Project> projects = parser.giveMeProject();
 		int numbergreat = 0;
