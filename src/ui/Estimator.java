@@ -62,22 +62,22 @@ public class Estimator {
 			attribs.put("TOOL", new String[] {"Very_Low","Low","Nominal","High","Very_High"});
 			attribs.put("SCED", new String[] {"Low","Nominal","High"});
 			attribs.put("LOC", new String[0]);
-			if(Project.containsAttribute(Project.Attribute.USER1)){
-				if(Project.isNumericalAttribute(Project.Attribute.USER1)){
+			if (Project.containsAttribute(Project.Attribute.USER1)){
+				if (Project.isNumericalAttribute(Project.Attribute.USER1)){
 					attribs.put("USER1", new String[0]);
 				} else {
 					attribs.put("USER1", new String[] {"Very_Low","Low","Nominal","High","Very_High", "Extra_High"});
 				}
 			}
-			if(Project.containsAttribute(Project.Attribute.USER2)){
-				if(Project.isNumericalAttribute(Project.Attribute.USER2)){
+			if (Project.containsAttribute(Project.Attribute.USER2)){
+				if (Project.isNumericalAttribute(Project.Attribute.USER2)){
 					attribs.put("USER2", new String[0]);
 				} else {
 					attribs.put("USER2", new String[] {"Very_Low","Low","Nominal","High","Very_High", "Extra_High"});
 				}
 			}
-			if(Project.containsAttribute(Project.Attribute.USER3)){
-				if(Project.isNumericalAttribute(Project.Attribute.USER3)){
+			if (Project.containsAttribute(Project.Attribute.USER3)){
+				if (Project.isNumericalAttribute(Project.Attribute.USER3)){
 					attribs.put("USER3", new String[0]);
 				} else {
 					attribs.put("USER3", new String[] {"Very_Low","Low","Nominal","High","Very_High", "Extra_High"});
@@ -89,44 +89,45 @@ public class Estimator {
 		}
 	}
 
-	private void getAndAddUserAttr(Ini newAttribs, Project.Attribute attr, String sec){
+	private void getAndAddUserAttr(Ini newAttribs, Project.Attribute attr, String sec) {
 		String type = newAttribs.get(sec, "type");
-		if(type == null){
+		if (type == null){
 			return;
-		}
-		if(type.equals("num")){
+		} else if (type.equals("num")) {
 			Project.addUserAttribute(attr, new HashMap<Project.AttributeValue, Double>());
-		} else if(type.equals("cat")) {
+		} else if (type.equals("cat")) {
 			double vl = newAttribs.get(sec, "very_low", double.class);
 			double l = newAttribs.get(sec, "low", double.class);
 			double n = newAttribs.get(sec, "nominal", double.class);
 			double h = newAttribs.get(sec, "high", double.class);
 			double vh = newAttribs.get(sec, "very_high", double.class);
 			double eh = newAttribs.get(sec, "extra_high", double.class);
+			
 			HashMap<Project.AttributeValue, Double> useratts = new HashMap<Project.AttributeValue, Double>();
-			if(vl > 0.0){
+			if (vl > 0.0){
 				useratts.put(Project.AttributeValue.VERY_LOW, vl);
 			}
-			if(l > 0.0){
+			if (l > 0.0){
 				useratts.put(Project.AttributeValue.LOW, l);
 			}
-			if(n > 0.0){
+			if (n > 0.0){
 				useratts.put(Project.AttributeValue.NOMINAL, n);
 			}
-			if(h > 0.0){
+			if (h > 0.0){
 				useratts.put(Project.AttributeValue.HIGH, h);
 			}
-			if(vh > 0.0){
+			if (vh > 0.0){
 				useratts.put(Project.AttributeValue.VERY_HIGH, vh);
 			}
-			if(eh > 0.0){
+			if (eh > 0.0){
 				useratts.put(Project.AttributeValue.EXTRA_HIGH, eh);
 			}
 			Project.addUserAttribute(attr, useratts);
-		} else {System.out.println("ERROR incorrect type of user attribute: " + sec);}
-
+		} else {
+			System.out.println("ERROR incorrect type of user attribute: " + sec);
+		}
 	}
-	
+
 	public void getUserAttributes(){
 		try {
 			Ini newAttribs = new Ini(new File("extra.ini"));
@@ -170,7 +171,7 @@ public class Estimator {
 				}
 			}
 		}
-		if(userAttribs.size() < 17){
+		if (userAttribs.size() < 17){
 			userAttribs.add("0.0");
 		} else {
 			userAttribs.add(16, "0.0");
@@ -186,8 +187,8 @@ public class Estimator {
 		Project inputProject = new Project(userAttribs);
 
 		ArrayList<Result> similarProjects = (ArrayList<Result>) db.similarProjects(inputProject);
-		if(similarProjects.size() == 0){
-	
+		if (similarProjects.size() == 0){
+
 			System.err.println("\u001B[31m\u001B[1mWARNING! No projects within given threshold\u001B[0m");
 		} else {
 			System.out.println("Found " + similarProjects.size() + " similar project(s). ");
@@ -205,11 +206,10 @@ public class Estimator {
 	private void printVal(String[] values) {
 		for (int i = 0; i < values.length; ++i) {
 			System.out.println(i  + ". " + values[i]);
-			}
 		}
-	
+	}
+
 	private double getDoubleInput(Scanner sc, ArrayList<String> userAttribs){
-		//Scanner sc = new Scanner(System.in);
 		boolean correct = false;
 		double number = 0.0;
 		while (!correct) {

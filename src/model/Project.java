@@ -137,7 +137,7 @@ public class Project {
 		attribNumerical = new HashMap<Attribute, Double>();
 		Iterator<String> iter = attributes.iterator();
 		for (Attribute att : attributeMap.keySet()) {
-			if(Project.isNumericalAttribute(att)){
+			if (Project.isNumericalAttribute(att)){
 				try {
 					attribNumerical.put(att, Double.parseDouble(iter.next()));
 				} catch (NumberFormatException nfe) {
@@ -211,18 +211,16 @@ public class Project {
 	}
 
 	/* see lecture 1 page 9. */
-	// TODO: test this shit
 	public double calculateEffort(ArrayList<Result> similarProjects) {
 		double totalSimilarity = 0;
-		for(Result similarity : similarProjects){
+		for (Result similarity : similarProjects){
 			totalSimilarity += similarity.simularity;
 		}
 		double effort = 0;
 		for(Result simResult : similarProjects){
 			Project simProj = simResult.project;
-			effort += this.getAttribute(Attribute.LOC)/simProj.getAttribute(Attribute.LOC)*
-				simProj.getAttribute(Attribute.ACT_EFFORT)*
-				simResult.simularity/totalSimilarity;
+			effort += (this.getAttribute(Attribute.LOC) / simProj.getAttribute(Attribute.LOC)) * 
+					simProj.getAttribute(Attribute.ACT_EFFORT) * (simResult.simularity / totalSimilarity);
 		}
 		return effort;
 	}
