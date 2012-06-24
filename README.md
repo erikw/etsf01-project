@@ -10,10 +10,10 @@ For further documentation; visit [doc/](https://github.com/erikw/etsf01_project/
 ## How to build and run
 Compile and run by typing the following commands:
 
-	$cd etsf01_project/
-	$ant
-	$./estimator.sh [<data filename>]
-	$./config.sh | ./estimator.sh [<data filename>]
+	$ cd etsf01_project/
+	$ ant
+	$ ./estimator.sh [<data filename>]
+	$ ./config.sh | ./estimator.sh [<data filename>]
 
 The first `estimator.sh` command will present an interactive interface where you will answer the questions about you project, enter threshold and you will get estimates for your project. In the seconds form a static configuration from the script `config.sh` will be fed to the program. You can edit the values in that script your self.
 
